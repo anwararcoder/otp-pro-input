@@ -1,0 +1,10 @@
+src
+tests
+examples
+docs
+.github
+tsconfig.json
+tsup.config.ts
+vitest.config.ts
+.eslintrc.js
+.prettierrc

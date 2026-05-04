@@ -1,0 +1,76 @@
+{
+  "name": "@ar-coder/otp-pro-input",
+  "version": "2.1.1",
+  "description": "A multi-framework OTP input component library.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/adapters/react.d.ts",
+      "import": "./dist/adapters/react.mjs",
+      "require": "./dist/adapters/react.js"
+    },
+    "./vue": {
+      "types": "./dist/adapters/vue.d.ts",
+      "import": "./dist/adapters/vue.mjs",
+      "require": "./dist/adapters/vue.js"
+    },
+    "./vanilla": {
+      "types": "./dist/adapters/vanilla.d.ts",
+      "import": "./dist/adapters/vanilla.mjs",
+      "require": "./dist/adapters/vanilla.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "keywords": [
+    "otp",
+    "input",
+    "component",
+    "typescript",
+    "multi-framework"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^3.2.5",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3",
+    "vitepress": "^1.6.4",
+    "vitest": "^1.3.1",
+    "vue": "^3.5.33"
+  }
+}
