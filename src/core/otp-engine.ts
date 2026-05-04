@@ -47,7 +47,7 @@ export class OtpEngine {
    */
   public handleInput(index: number, input: string): void {
     const autofillResult = OtpAutofill.handle(input, index, this.values, this.length);
-    
+
     if (autofillResult) {
       this.values = autofillResult.updatedValues;
       this.activeIndex = autofillResult.nextIndex;

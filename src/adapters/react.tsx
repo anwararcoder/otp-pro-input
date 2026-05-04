@@ -70,7 +70,7 @@ export const OTPInput: React.FC<ReactOtpInputProps> = ({
 
   const handleInputChange = useCallback((index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
-    // We get the last character if it was a single char change, 
+    // We get the last character if it was a single char change,
     // or the whole string if it was an autofill/paste that React didn't intercept as paste
     engineRef.current?.handleInput(index, val);
     setActiveIndex(engineRef.current?.getActiveIndex() ?? 0);
@@ -96,12 +96,15 @@ export const OTPInput: React.FC<ReactOtpInputProps> = ({
     engineRef.current?.setActiveIndex(index);
   };
 
-  const values = controlledValue !== undefined ? controlledValue.split('').concat(new Array(length).fill('')).slice(0, length) : internalValues;
+  const values =
+    controlledValue !== undefined
+      ? controlledValue.split('').concat(new Array(length).fill('')).slice(0, length)
+      : internalValues;
 
   return (
-    <div 
-      className={className} 
-      style={{ display: 'flex', gap: '8px', ... (error ? { borderColor: 'red' } : {}) }}
+    <div
+      className={className}
+      style={{ display: 'flex', gap: '8px', ...(error ? { borderColor: 'red' } : {}) }}
     >
       {values.map((val, i) => {
         const inputProps: React.ComponentPropsWithRef<'input'> = {
@@ -125,7 +128,9 @@ export const OTPInput: React.FC<ReactOtpInputProps> = ({
             ...(activeIndex === i ? { borderColor: '#007bff', outline: 'none' } : {}),
             ...(error ? { borderColor: 'red' } : {}),
           },
-          ref: (el: HTMLInputElement | null) => { inputRefs.current[i] = el; }
+          ref: (el: HTMLInputElement | null) => {
+            inputRefs.current[i] = el;
+          },
         };
 
         if (renderInput) {

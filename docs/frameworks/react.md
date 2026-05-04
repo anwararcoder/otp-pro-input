@@ -34,8 +34,6 @@ Use the `renderInput` prop to customize the look of each input:
 ```tsx
 <OTPInput
   length={4}
-  renderInput={(props, index) => (
-    <input {...props} className="my-custom-input-class" />
-  )}
+  renderInput={(props, index) => <input {...props} className="my-custom-input-class" />}
 />
 ```

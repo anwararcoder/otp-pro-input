@@ -20,12 +20,7 @@ export const OtpAutofill = {
     if (input.length <= 1) return null;
 
     const emptyValues = new Array(maxLength).fill('');
-    const { updatedValues, lastIndex } = OtpPaste.distribute(
-      input,
-      0,
-      emptyValues,
-      maxLength,
-    );
+    const { updatedValues, lastIndex } = OtpPaste.distribute(input, 0, emptyValues, maxLength);
 
     return {
       updatedValues,

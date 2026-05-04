@@ -17,7 +17,7 @@ import { createOtpInput } from '@ar-coder/otp-pro-input/vanilla';
   const otp = createOtpInput({
     container: '#otp-container',
     length: 4,
-    onComplete: (code) => alert('Code: ' + code)
+    onComplete: (code) => alert('Code: ' + code),
   });
 </script>
 ```

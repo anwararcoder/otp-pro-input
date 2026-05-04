@@ -16,9 +16,9 @@ export const OtpPaste = {
   ): { updatedValues: string[]; lastIndex: number } {
     const cleanValue = OtpValidation.numericOnly(pastedValue).split('');
     const newValues = [...currentValues];
-    
+
     let lastIndex = startIndex;
-    for (let i = 0; i < cleanValue.length && (startIndex + i) < maxLength; i++) {
+    for (let i = 0; i < cleanValue.length && startIndex + i < maxLength; i++) {
       newValues[startIndex + i] = cleanValue[i];
       lastIndex = startIndex + i;
     }

@@ -42,7 +42,7 @@ export const OTPInput = defineComponent({
     const internalValues = ref<string[]>(new Array(props.length).fill(''));
     const activeIndex = ref(0);
     const inputRefs = ref<(HTMLInputElement | null)[]>([]);
-    
+
     const engine = new OtpEngine({
       length: props.length,
       value: props.modelValue,
@@ -57,15 +57,18 @@ export const OTPInput = defineComponent({
     });
 
     // Synchronize prop value changes
-    watch(() => props.modelValue, (newVal) => {
-      if (newVal !== undefined) {
-        const currentVal = engine.getValues().join('');
-        if (newVal !== currentVal) {
-          engine.handlePaste(newVal, 0);
-          internalValues.value = engine.getValues();
+    watch(
+      () => props.modelValue,
+      (newVal) => {
+        if (newVal !== undefined) {
+          const currentVal = engine.getValues().join('');
+          if (newVal !== currentVal) {
+            engine.handlePaste(newVal, 0);
+            internalValues.value = engine.getValues();
+          }
         }
-      }
-    });
+      },
+    );
 
     // Handle focus movement
     watch(activeIndex, (newIdx) => {
@@ -110,43 +113,49 @@ export const OTPInput = defineComponent({
 
     const values = computed(() => {
       if (props.modelValue !== undefined) {
-        return props.modelValue.split('').concat(new Array(props.length).fill('')).slice(0, props.length);
+        return props.modelValue
+          .split('')
+          .concat(new Array(props.length).fill(''))
+          .slice(0, props.length);
       }
       return internalValues.value;
     });
 
-    return () => 
-      h('div', {
-        class: props.className,
-        style: { display: 'flex', gap: '8px' }
-      }, values.value.map((val, i) => 
-        h('input', {
-          key: i,
-          ref: (el: any) => { inputRefs.value[i] = el; },
-          value: val,
-          onInput: (e: Event) => handleInput(i, e),
-          onKeydown: (e: KeyboardEvent) => handleKeyDown(i, e),
-          onPaste: (e: ClipboardEvent) => handlePaste(i, e),
-          onFocus: () => handleFocus(i),
-          disabled: props.disabled,
-          type: props.type,
-          maxLength: props.length,
-          autocomplete: i === 0 ? 'one-time-code' : 'off',
-          class: [
-            props.inputClassName,
-            { 'active': activeIndex.value === i, 'error': props.error }
-          ],
-          style: {
-            width: '40px',
-            height: '40px',
-            textAlign: 'center',
-            fontSize: '1.2rem',
-            borderRadius: '4px',
-            border: '1px solid #ccc',
-            ...(activeIndex.value === i ? { borderColor: '#007bff', outline: 'none' } : {}),
-            ...(props.error ? { borderColor: 'red' } : {}),
-          }
-        })
-      ));
-  }
+    return () =>
+      h(
+        'div',
+        {
+          class: props.className,
+          style: { display: 'flex', gap: '8px' },
+        },
+        values.value.map((val, i) =>
+          h('input', {
+            key: i,
+            ref: (el: any) => {
+              inputRefs.value[i] = el;
+            },
+            value: val,
+            onInput: (e: Event) => handleInput(i, e),
+            onKeydown: (e: KeyboardEvent) => handleKeyDown(i, e),
+            onPaste: (e: ClipboardEvent) => handlePaste(i, e),
+            onFocus: () => handleFocus(i),
+            disabled: props.disabled,
+            type: props.type,
+            maxLength: props.length,
+            autocomplete: i === 0 ? 'one-time-code' : 'off',
+            class: [props.inputClassName, { active: activeIndex.value === i, error: props.error }],
+            style: {
+              width: '40px',
+              height: '40px',
+              textAlign: 'center',
+              fontSize: '1.2rem',
+              borderRadius: '4px',
+              border: '1px solid #ccc',
+              ...(activeIndex.value === i ? { borderColor: '#007bff', outline: 'none' } : {}),
+              ...(props.error ? { borderColor: 'red' } : {}),
+            },
+          }),
+        ),
+      );
+  },
 });

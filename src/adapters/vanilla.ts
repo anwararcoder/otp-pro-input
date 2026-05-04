@@ -61,7 +61,7 @@ export function createOtpInput(options: VanillaOtpOptions): VanillaOtpInstance {
     input.className = inputClassName;
     input.maxLength = length; // To capture autofill/multi-char
     input.autocomplete = i === 0 ? 'one-time-code' : 'off';
-    
+
     // Default styles
     Object.assign(input.style, {
       width: '40px',

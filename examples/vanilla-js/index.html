@@ -1,48 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanilla JS OTP Example</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; }
-        .controls { margin-top: 20px; }
-        button { padding: 8px 16px; cursor: pointer; }
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      .controls {
+        margin-top: 20px;
+      }
+      button {
+        padding: 8px 16px;
+        cursor: pointer;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Vanilla JS OTP Example</h1>
     <p>Enter your 5-digit code:</p>
-    
+
     <div id="otp-container"></div>
-    
+
     <div class="controls">
-        <p>Status: <span id="status">Waiting...</span></p>
-        <button id="get-value">Get Value</button>
-        <button id="clear">Clear</button>
+      <p>Status: <span id="status">Waiting...</span></p>
+      <button id="get-value">Get Value</button>
+      <button id="clear">Clear</button>
     </div>
 
     <script type="module">
-        import { createOtpInput } from '../../src/adapters/vanilla.ts';
+      import { createOtpInput } from '../../src/adapters/vanilla.ts';
 
-        const otp = createOtpInput({
-            container: '#otp-container',
-            length: 5,
-            onChange: (val) => {
-                document.getElementById('status').textContent = val || 'Waiting...';
-            },
-            onComplete: (val) => {
-                alert('Vanilla OTP Complete: ' + val);
-            }
-        });
+      const otp = createOtpInput({
+        container: '#otp-container',
+        length: 5,
+        onChange: (val) => {
+          document.getElementById('status').textContent = val || 'Waiting...';
+        },
+        onComplete: (val) => {
+          alert('Vanilla OTP Complete: ' + val);
+        },
+      });
 
-        document.getElementById('get-value').onclick = () => {
-            alert('Current Value: ' + otp.getValue());
-        };
+      document.getElementById('get-value').onclick = () => {
+        alert('Current Value: ' + otp.getValue());
+      };
 
-        document.getElementById('clear').onclick = () => {
-            otp.setValue('');
-        };
+      document.getElementById('clear').onclick = () => {
+        otp.setValue('');
+      };
     </script>
-</body>
+  </body>
 </html>

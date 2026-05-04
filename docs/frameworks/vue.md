@@ -10,11 +10,7 @@ import { OTPInput } from '@ar-coder/otp-pro-input/vue';
 
 ```vue
 <template>
-  <OTPInput
-    v-model="otp"
-    :length="6"
-    @complete="onComplete"
-  />
+  <OTPInput v-model="otp" :length="6" @complete="onComplete" />
 </template>
 
 <script setup>

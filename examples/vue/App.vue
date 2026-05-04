@@ -2,17 +2,11 @@
   <div class="example">
     <h1>Vue 3 OTP Example</h1>
     <p>Enter your 4-digit code:</p>
-    
-    <OTPInput
-      v-model="otp"
-      :length="4"
-      @complete="onComplete"
-    />
-    
-    <div class="status">
-      <strong>Current Value:</strong> {{ otp }}
-    </div>
-    
+
+    <OTPInput v-model="otp" :length="4" @complete="onComplete" />
+
+    <div class="status"><strong>Current Value:</strong> {{ otp }}</div>
+
     <button @click="otp = ''">Reset</button>
   </div>
 </template>
