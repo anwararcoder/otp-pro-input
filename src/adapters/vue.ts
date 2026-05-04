@@ -1,4 +1,13 @@
-import { defineComponent, h, ref, onMounted, watch, nextTick, computed } from 'vue';
+import {
+  defineComponent,
+  h,
+  ref,
+  onMounted,
+  watch,
+  nextTick,
+  computed,
+  type ComponentPublicInstance,
+} from 'vue';
 import { OtpEngine } from '../core/otp-engine';
 
 export const OTPInput = defineComponent({
@@ -37,7 +46,11 @@ export const OTPInput = defineComponent({
       default: 'tel',
     },
   },
-  emits: ['update:modelValue', 'change', 'complete'],
+  emits: {
+    'update:modelValue': (value: string) => typeof value === 'string',
+    change: (value: string) => typeof value === 'string',
+    complete: (value: string) => typeof value === 'string',
+  },
   setup(props, { emit }) {
     const internalValues = ref<string[]>(new Array(props.length).fill(''));
     const activeIndex = ref(0);
@@ -46,12 +59,12 @@ export const OTPInput = defineComponent({
     const engine = new OtpEngine({
       length: props.length,
       value: props.modelValue,
-      onChange: (val) => {
+      onChange: (val: string) => {
         internalValues.value = engine.getValues();
         emit('update:modelValue', val);
         emit('change', val);
       },
-      onComplete: (val) => {
+      onComplete: (val: string) => {
         emit('complete', val);
       },
     });
@@ -131,8 +144,8 @@ export const OTPInput = defineComponent({
         values.value.map((val, i) =>
           h('input', {
             key: i,
-            ref: (el: any) => {
-              inputRefs.value[i] = el;
+            ref: (el: Element | ComponentPublicInstance | null) => {
+              inputRefs.value[i] = el as HTMLInputElement | null;
             },
             value: val,
             onInput: (e: Event) => handleInput(i, e),
